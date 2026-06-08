@@ -1,5 +1,6 @@
 import { InlineText, LinkButton, Title } from "@/components/atoms";
 import { Page } from "@/components/molecules";
+import styled from "styled-components";
 
 const pokeballImage =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/1024px-Pok%C3%A9_Ball_icon.svg.png?20161023215848";
@@ -79,6 +80,168 @@ export const Component = () => {
           👁️ Figma
         </LinkButton>
       </p>
+
+      <Section>
+        <SectionTitle>Karteczki</SectionTitle>
+
+        <CardsList>
+          {pokemons.map((pokemon, index) => (
+            <Card>
+              <CardHeader>
+                <CardLogo src={pokeballImage} />
+                <CardHeaderColumn>
+                  <CardName>{pokemon.name}</CardName>
+                  <CardNumber>{pokemon.number}</CardNumber>
+                </CardHeaderColumn>
+              </CardHeader>
+              <CardBody>
+                <CardImage src={pokemon.image} />
+                <CardCategory>{pokemon.category}</CardCategory>
+              </CardBody>
+              <CardFooter>
+                <CardParagraph>{pokemon.description}</CardParagraph>
+                <CardSubsription>
+                  <CardLink
+                    href={`https://www.pokemon.com/us/pokedex/${pokemon.name}`}
+                    target="_blank"
+                  >
+                    View
+                  </CardLink>
+                </CardSubsription>
+              </CardFooter>
+            </Card>
+          ))}
+        </CardsList>
+      </Section>
     </Page>
   );
 };
+
+const Section = styled.section`
+  width: 100%;
+  border: 1px solid black;
+`;
+
+const SectionTitle = styled.h1`
+  margin: 0;
+  color: #000;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 36px;
+`;
+
+const CardsList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 24px;
+  row-gap: 12px;
+  list-style: none;
+  margin: 0;
+  margin-top: 24px;
+  padding: 0;
+`;
+
+const Card = styled.li`
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 100%;
+  max-width: 342px;
+  border-radius: 12px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 25%);
+  overflow: hidden;
+`;
+
+const CardHeader = styled.header`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 24px;
+`;
+
+const CardLogo = styled.img`
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+`;
+
+const CardHeaderColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+`;
+
+const CardName = styled.h2`
+  margin: 0;
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: capitalize;
+`;
+
+const CardNumber = styled.span`
+  color: #666;
+  font-size: 14px;
+`;
+
+const CardBody = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+const CardImage = styled.img`
+  display: block;
+  min-width: 100%;
+  height: 198px;
+  object-fit: contain;
+  background-color: #ccc;
+`;
+
+const CardFooter = styled.footer`
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px 24px 32px;
+`;
+
+const CardParagraph = styled.p`
+  color: #666;
+  font-size: 14px;
+`;
+
+const CardSubsription = styled.div`
+  margin-top: auto;
+`
+
+const CardLink = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  color: white;
+  margin-top: 24px;
+  width: fit-content;
+  margin-left: auto;
+`;
+
+const CardCategory = styled.span`
+  display: flex;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  color: white;
+  width: fit-content;
+  text-transform: capitalize;
+  font-size: 12px;
+`
